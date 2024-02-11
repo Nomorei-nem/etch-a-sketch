@@ -16,14 +16,15 @@
 	align-items: center;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	width: 30%;
+	width: 45%;
+	height: 45%;
 	border: 0.5px solid black;
 	margin: auto;
 	cursor: url(/images/marker.png), default;
 }
 
 .grid-pixel {
-	flex: 1 0 25%;
+	/* flex: 1 0 25%; */
 	height: auto;
 }
 
