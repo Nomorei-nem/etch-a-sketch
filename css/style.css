@@ -18,7 +18,7 @@
 	flex-wrap: wrap;
 	width: 45%;
 	height: 45%;
-	border: 0.5px solid black;
+	border: 5px solid rgba(139, 29, 29, 0.363);
 	margin: auto;
 	cursor: url(/images/marker.png), default;
 }
@@ -35,5 +35,5 @@
 }
 
 .color-me {
-	background-color: rgb(138, 43, 226);
+	background-color: rgb(137, 43, 226);
 }
