@@ -15,21 +15,47 @@ for (let i = 1; i <= 16; i++) {
 	gridContainer.innerHTML += `<div style="flex: 1 0 25%" class="grid-pixel pixel-no${i}" data-${i}></div>`;
 }
 
-// Mouseover event listener to draw with random colors
+// Mouseover event listener to each grid square to draw with random colors + fade out
 let gridPixel = Array.from(document.querySelectorAll('.grid-pixel'));
 
 for (let i = 0; i < gridPixel.length; i++) {
 	gridPixel[i].addEventListener('mouseover', (e) => {
 		let one = 1;
 		const colorPick = randomColor();
-		e.target.style = `background-color: ${colorPick}, ${one}); flex: 1 0 25%`;
+		const colorCheck = getComputedStyle(e.target).getPropertyValue(
+			'background-color'
+		);
+		const alphaCheck = parseFloat(colorCheck.split(',')[3]);
 
-		const alphaCountdown = setInterval(() => {
-			one = +(one -= 0.01).toFixed(2);
+		if (alphaCheck > 0) {
+			// console.log('gotem');
 
-			e.target.style = `background-color: ${colorPick}, ${one}); flex: 1 0 25%`;
-			if (one <= 0) clearInterval(alphaCountdown);
-		}, 20);
+			// e.target.style = ``;
+
+			// clearInterval(alphaCountdown);
+
+			// console.log(
+			// 	getComputedStyle(e.target).getPropertyValue('background-color')
+			// );
+			console.log(alphaCheck);
+
+			// const alphaCountdown = setInterval(() => {
+			// 	one = +(one -= 0.005).toFixed(3);
+
+			// e.target.style = `background-color: ${colorPick}, ${one}); flex: 1 0 25%`;
+			// 	if (one <= 0) clearInterval(alphaCountdown);
+			// }, 10);
+
+			// if (!alphaCheck === 1) clearInterval(alphaCountdown);
+		} else {
+			// Fade out interval timer
+			const alphaCountdown = setInterval(() => {
+				one = +(one -= 0.005).toFixed(3);
+
+				e.target.style = `background-color: ${colorPick}, ${one}); flex: 1 0 25%`;
+				if (one <= 0) clearInterval(alphaCountdown);
+			}, 10);
+		}
 	});
 }
 
