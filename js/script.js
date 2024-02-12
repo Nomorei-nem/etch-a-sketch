@@ -6,31 +6,9 @@ const gridResolution = document.querySelector('.grid-resolution');
 // Random color generator
 const randomColor = function () {
 	const rgbaValue = () => Math.floor(Math.random() * 256);
-	let one = 1;
-	setInterval(() => (one -= 0.01).toFixed(3), 20);
 
-	console.log(`rgba(${rgbaValue()}, ${rgbaValue()}, ${rgbaValue()}, ${one})`);
-
-	return `rgba(${rgbaValue()}, ${rgbaValue()}, ${rgbaValue()}, ${one})`;
+	return `rgba(${rgbaValue()}, ${rgbaValue()}, ${rgbaValue()}`;
 };
-
-// const alphaCountdown = function () {
-// 	let one = 1;
-// 	if (one === 0.0) {
-// 		clearInterval(alphaCountdown);
-// 	}
-// 	setInterval(() => console.log((one -= 0.01).toFixed(3)), 20);
-// };
-
-// alphaCountdown();
-
-let one = 1;
-
-const alphaCountdown = setInterval(() => {
-	+(one -= 0.01).toFixed(2);
-
-	if (one <= 0) clearInterval(alphaCountdown);
-}, 20);
 
 // Creating 4x4 grid
 for (let i = 1; i <= 16; i++) {
@@ -42,13 +20,16 @@ let gridPixel = Array.from(document.querySelectorAll('.grid-pixel'));
 
 for (let i = 0; i < gridPixel.length; i++) {
 	gridPixel[i].addEventListener('mouseover', (e) => {
-		e.target.style = `background-color: ${randomColor()}; flex: 1 0 25%`;
+		let one = 1;
+		const colorPick = randomColor();
+		e.target.style = `background-color: ${colorPick}, ${one}); flex: 1 0 25%`;
 
-		setTimeout(
-			() =>
-				(e.target.style = `background-color: ${randomColor()}; flex: 1 0 25%`),
-			100
-		);
+		const alphaCountdown = setInterval(() => {
+			one = +(one -= 0.01).toFixed(2);
+
+			e.target.style = `background-color: ${colorPick}, ${one}); flex: 1 0 25%`;
+			if (one <= 0) clearInterval(alphaCountdown);
+		}, 20);
 	});
 }
 
