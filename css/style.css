@@ -20,7 +20,7 @@
 	height: 45%;
 	border: 5px solid rgba(139, 29, 29, 0.363);
 	margin: auto;
-	cursor: url(/images/marker.png), default;
+	cursor: url(/images/nyan-cat-right.cur), default;
 }
 
 .grid-pixel {

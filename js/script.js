@@ -2,6 +2,7 @@
 
 let gridContainer = document.querySelector('.container');
 const gridResolution = document.querySelector('.grid-resolution');
+const previousCursorLocation = { x: null, y: null };
 
 // Random color generator
 const randomColor = function () {
@@ -15,6 +16,24 @@ for (let i = 1; i <= 16; i++) {
 	gridContainer.innerHTML += `<div style="flex: 1 0 25%" class="grid-pixel pixel-no${i}" data-${i}></div>`;
 }
 
+gridContainer.addEventListener('mousemove', (e) => {
+	const leftOrRight = e.clientX > previousCursorLocation.x ? 'right' : 'left';
+	const upOrDown = e.clientY < previousCursorLocation.y ? 'up' : 'down';
+
+	previousCursorLocation.x = e.clientX;
+	previousCursorLocation.y = e.clientY;
+
+	if (upOrDown === 'up')
+		gridContainer.style = 'cursor: url(/images/nyan-cat-up.cur), default';
+	if (upOrDown === 'down')
+		gridContainer.style = 'cursor: url(/images/nyan-cat-down.cur), default';
+
+	if (leftOrRight === 'right')
+		gridContainer.style = 'cursor: url(/images/nyan-cat-right.cur), default';
+	if (leftOrRight === 'left')
+		gridContainer.style = 'cursor: url(/images/nyan-cat-left.cur), default';
+});
+
 // Mouseover event listener to each grid square to draw with random colors + fade out
 let gridPixel = Array.from(document.querySelectorAll('.grid-pixel'));
 
@@ -27,33 +46,16 @@ for (let i = 0; i < gridPixel.length; i++) {
 		);
 		const alphaCheck = parseFloat(colorCheck.split(',')[3]);
 
-		if (alphaCheck > 0) {
-			// console.log('gotem');
-
-			// e.target.style = ``;
-
-			// clearInterval(alphaCountdown);
-
-			// console.log(
-			// 	getComputedStyle(e.target).getPropertyValue('background-color')
-			// );
-			console.log(alphaCheck);
-
-			// const alphaCountdown = setInterval(() => {
-			// 	one = +(one -= 0.005).toFixed(3);
-
-			// e.target.style = `background-color: ${colorPick}, ${one}); flex: 1 0 25%`;
-			// 	if (one <= 0) clearInterval(alphaCountdown);
-			// }, 10);
-
-			// if (!alphaCheck === 1) clearInterval(alphaCountdown);
-		} else {
+		// Check if alpha is 0 to prevent 2 colors being applied at same time
+		if (alphaCheck === 0) {
 			// Fade out interval timer
 			const alphaCountdown = setInterval(() => {
-				one = +(one -= 0.005).toFixed(3);
+				one = +(one -= 0.01).toFixed(3);
 
 				e.target.style = `background-color: ${colorPick}, ${one}); flex: 1 0 25%`;
 				if (one <= 0) clearInterval(alphaCountdown);
+				if (!alphaCheck === 1)
+					e.target.style = `background-color: ${colorPick}, ${one}); flex: 1 0 25%`;
 			}, 10);
 		}
 	});
