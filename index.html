@@ -4,23 +4,48 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline+Display:wght@100..900&family=Comfortaa:wght@300..700&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline+Display:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script defer src="js/script.js"></script>
 		<title>Etch-A-Sketch</title>
 	</head>
+<article class="etch-a-sketch">
 
-	<body>
-		<form class="grid-resolution">
-			<label for="resolution">Pick the grid's width (1-100):</label
-			><input
-				type="number"
-				id="resolution"
+	
+	<h1>Etch-a-Sketch</h1>
+	<div class="game-container">
+
+
+		<div class="grid-options">
+			<form class="grid-resolution">
+				<label class='resolution-label'for="resolution">Grid: 4 x 4</label
+					><input
+					type="range"				
 				class="resolution"
 				min="1"
-				max="100"
-			/>
-			<button>Submit</button>
-		</form>
+				max="40"
+				default value = "4"
+				/>
+				
+			</form>
+			
+			<button class="btn rainbow-btn">Rainbow Mode</button>
+			<form class>
+				<button class ="btn color-btn">Color Mode</button>
+				
+				<input type="color" value="#00eeff"/>
+			</form>
+			<button class="btn clear-btn btn--active">Clean Slate</button>
+		</div>
 		<div class="container"></div>
-	</body>
+
+	</div>
+	</article>
+</body>
 </html>

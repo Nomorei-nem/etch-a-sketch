@@ -1,8 +1,18 @@
 'use strict';
 
 let gridContainer = document.querySelector('.container');
-const gridResolution = document.querySelector('.grid-resolution');
+const gridResolution = document.querySelector('.resolution');
 const previousCursorLocation = { x: null };
+
+// Callback function for Nyan Cat Song
+const nyanCatSong = function () {
+	const audio = new Audio(
+		'https://cf-media.sndcdn.com/jLbSNoCIpol4.128.mp3?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLW1lZGlhLnNuZGNkbi5jb20vakxiU05vQ0lwb2w0LjEyOC5tcDMqIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzA3OTk2NTIyfX19XX0_&Signature=TX9e2s7R-LpXW9ZJyqN7kuxE65uRY2SETNiRMU8h5Jy81mjVY5sIC~bnMCPsYClaA~bvousU3bwntFxc9i01HBUjwOGaf1vWUlRmZ~jKnl8I9QqNHbFIySzasKnMBo32oufXrgL1u7l-psLmFfDd4~12yEIPp9mTa-O00e9k26u-U-ZVG9rObQi6wzFbC9YxxnMD7pqqqbGiDkgoA1EpPvh15Ylr~8SHnFZTmMDtN4ZAitvGqs6IeIL~MQ~WDne4d39mqqQDqg1fgwrph-FsbBcc9Ghfx~CHCPVRMIy44H79-89dbTOF527xJK5OX03Osa1uRjDLr3dewwviDNd8jg__&Key-Pair-Id=APKAI6TU7MMXM5DG6EPQ'
+	);
+
+	audio.volume = 0.03;
+	audio.play();
+};
 
 // rainbow grid coloring function
 const rainbowFadeOut = function (gridWidth) {
@@ -23,10 +33,10 @@ const rainbowFadeOut = function (gridWidth) {
 				const alphaCountdown = setInterval(() => {
 					one = +(one -= 0.01).toFixed(3);
 
-					e.target.style = `background-color: ${colorPick}, ${one}); flex: 1 0 ${newPixelWidth}%`;
+					e.target.style = `border-radius: 50%; background-color: ${colorPick}, ${one}); flex: 1 0 ${newPixelWidth}%`;
 					if (one <= 0) clearInterval(alphaCountdown);
 					if (!alphaCheck === 1)
-						e.target.style = `background-color: ${colorPick}, ${one}); flex: 1 0 ${newPixelWidth}%`;
+						e.target.style = `border-radius: 50%; background-color: ${colorPick}, ${one}); flex: 1 0 ${newPixelWidth}%`;
 				}, 10);
 			}
 		});
@@ -51,6 +61,13 @@ const randomColor = function () {
 // Creating 4x4 grid
 gridGenerator(4);
 
+// Song plays when you enter grid
+// gridContainer.addEventListener('mouseenter', () => nyanCatSong());
+// gridContainer.addEventListener('mouseleave', () => {
+// 	nyanCatSong().pause();
+// 	nyanCatSong().currentTime = 0;
+// });
+
 // Create array of grid pixels from generated grid
 let gridPixel = Array.from(document.querySelectorAll('.grid-pixel'));
 
@@ -70,9 +87,13 @@ gridContainer.addEventListener('mousemove', (e) => {
 rainbowFadeOut(4);
 
 // Function for user to input the drawing grid's width
-gridResolution.addEventListener('submit', (e) => {
+gridResolution.addEventListener('change', (e) => {
 	const resolution = document.querySelector('.resolution');
 	const userResolution = +resolution.value;
+	console.log(resolution);
+	document.querySelector(
+		'.resolution-label'
+	).innerText = `Grid: ${userResolution} x ${userResolution}`;
 
 	resolution.blur();
 	e.preventDefault();
