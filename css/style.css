@@ -12,7 +12,7 @@
 }
 
 body {
-	background: rgba(0, 0, 0, 0.88)
+	background: rgba(0, 0, 0, 0.92)
 		url(/images/nordwood-themes-9a58YsGiTPk-unsplash.jpg);
 	background-size: 30%;
 	background-blend-mode: darken;
@@ -71,7 +71,6 @@ h1 {
 	border-radius: 8px;
 	border: 1px solid cyan;
 	background: none;
-	background-color: ;
 }
 
 .btn:hover {

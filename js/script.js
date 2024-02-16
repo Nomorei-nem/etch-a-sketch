@@ -26,6 +26,10 @@ const rainbowFadeOut = function (gridWidth) {
 				'background-color'
 			);
 			const alphaCheck = parseFloat(colorCheck.split(',')[3]);
+			const applyColorInGrid = function (alpha) {
+				e.target.style = `flex: 1 0 ${newPixelWidth}%; border-radius: 50%; background-color: ${colorPick}, ${alpha}); box-shadow: 0 0 42px ${colorPick}, ${alpha}),
+				0 0 82px ${colorPick}, ${alpha}), 0 0 92px ${colorPick}, ${alpha}), 0 0 102px ${colorPick}, ${alpha}), 0 0 151px ${colorPick}, ${alpha});`;
+			};
 
 			// Check if alpha is 0 to prevent 2 colors being applied at same time
 			if (alphaCheck === 0) {
@@ -33,10 +37,9 @@ const rainbowFadeOut = function (gridWidth) {
 				const alphaCountdown = setInterval(() => {
 					one = +(one -= 0.01).toFixed(3);
 
-					e.target.style = `border-radius: 50%; background-color: ${colorPick}, ${one}); flex: 1 0 ${newPixelWidth}%`;
+					applyColorInGrid(one);
 					if (one <= 0) clearInterval(alphaCountdown);
-					if (!alphaCheck === 1)
-						e.target.style = `border-radius: 50%; background-color: ${colorPick}, ${one}); flex: 1 0 ${newPixelWidth}%`;
+					// if (!alphaCheck === 1) applyColorInGrid(one);
 				}, 10);
 			}
 		});
@@ -47,7 +50,7 @@ const rainbowFadeOut = function (gridWidth) {
 const gridGenerator = function (gridWidth) {
 	const PixelWidth = 100 / gridWidth;
 	for (let i = 1; i <= gridWidth * gridWidth; i++) {
-		gridContainer.innerHTML += `<div style="flex: 1 0 ${PixelWidth}%" class="grid-pixel pixel-no${i}" data-${i}></div>`;
+		gridContainer.innerHTML += `<div style="flex: 1 0 ${PixelWidth}%; " class="grid-pixel pixel-no${i}" data-${i}></div>`;
 	}
 };
 
