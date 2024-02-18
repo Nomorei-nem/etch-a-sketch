@@ -3,16 +3,80 @@
 let gridContainer = document.querySelector('.container');
 const gridResolution = document.querySelector('.resolution');
 const previousCursorLocation = { x: null };
+const colorInput = document.querySelector('.color-picker');
+const rainbowBtn = document.querySelector('.rainbow-btn');
+const colorBtn = document.querySelector('.color-btn');
+const cleanBtn = document.querySelector('.clean-btn');
+let userColorChoice;
+
+// Function to style Grid Container
+const gridContainerStyleSettings = function () {
+	return `text-align: center;
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+width: 40%;
+height: 40%;
+border-radius: 10px;
+border: 5px solid #ffffff;
+box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px ${userColorChoice};
+margin: auto;
+cursor: url(/images/nyan-cat-right.cur), default;`;
+};
+
+const colorInputStyleSettings = gridContainerStyleSettings.bind(colorInput);
+
+colorInput.addEventListener('input', (e) => {
+	const h1 = document.querySelector('h1');
+	const colorBtn = document.querySelector('.color-btn');
+
+	userColorChoice = e.target.value;
+
+	colorInput.style = `background-color: ${userColorChoice};
+		box-shadow: 0 0 30px ${userColorChoice};`;
+
+	colorBtn.style = `color: ${userColorChoice}`;
+
+	gridContainer.style = colorInputStyleSettings();
+
+	h1.style = `font-family: 'Big Shoulders Inline Display', sans-serif;
+	font-size: 100px;
+	text-transform: uppercase;
+	margin-bottom: 50px;
+	text-align: center;
+	color: ${userColorChoice};
+	text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px ${userColorChoice},
+		0 0 82px ${userColorChoice}, 0 0 92px ${userColorChoice}, 0 0 102px ${userColorChoice}, 0 0 151px ${userColorChoice};`;
+
+	return userColorChoice;
+});
+
+rainbowBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+	colorBtn.classList.remove('btn--active');
+	rainbowBtn.classList.add('btn--active');
+});
+
+colorBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+	colorBtn.classList.add('btn--active');
+	rainbowBtn.classList.remove('btn--active');
+});
+
+cleanBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+});
 
 // Callback function for Nyan Cat Song
-const nyanCatSong = function () {
-	const audio = new Audio(
-		'https://cf-media.sndcdn.com/jLbSNoCIpol4.128.mp3?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLW1lZGlhLnNuZGNkbi5jb20vakxiU05vQ0lwb2w0LjEyOC5tcDMqIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzA3OTk2NTIyfX19XX0_&Signature=TX9e2s7R-LpXW9ZJyqN7kuxE65uRY2SETNiRMU8h5Jy81mjVY5sIC~bnMCPsYClaA~bvousU3bwntFxc9i01HBUjwOGaf1vWUlRmZ~jKnl8I9QqNHbFIySzasKnMBo32oufXrgL1u7l-psLmFfDd4~12yEIPp9mTa-O00e9k26u-U-ZVG9rObQi6wzFbC9YxxnMD7pqqqbGiDkgoA1EpPvh15Ylr~8SHnFZTmMDtN4ZAitvGqs6IeIL~MQ~WDne4d39mqqQDqg1fgwrph-FsbBcc9Ghfx~CHCPVRMIy44H79-89dbTOF527xJK5OX03Osa1uRjDLr3dewwviDNd8jg__&Key-Pair-Id=APKAI6TU7MMXM5DG6EPQ'
-	);
+// const nyanCatSong = function () {
+// 	const audio = new Audio(
+// 		'https://cf-media.sndcdn.com/jLbSNoCIpol4.128.mp3?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLW1lZGlhLnNuZGNkbi5jb20vakxiU05vQ0lwb2w0LjEyOC5tcDMqIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzA3OTk2NTIyfX19XX0_&Signature=TX9e2s7R-LpXW9ZJyqN7kuxE65uRY2SETNiRMU8h5Jy81mjVY5sIC~bnMCPsYClaA~bvousU3bwntFxc9i01HBUjwOGaf1vWUlRmZ~jKnl8I9QqNHbFIySzasKnMBo32oufXrgL1u7l-psLmFfDd4~12yEIPp9mTa-O00e9k26u-U-ZVG9rObQi6wzFbC9YxxnMD7pqqqbGiDkgoA1EpPvh15Ylr~8SHnFZTmMDtN4ZAitvGqs6IeIL~MQ~WDne4d39mqqQDqg1fgwrph-FsbBcc9Ghfx~CHCPVRMIy44H79-89dbTOF527xJK5OX03Osa1uRjDLr3dewwviDNd8jg__&Key-Pair-Id=APKAI6TU7MMXM5DG6EPQ'
+// 	);
 
-	audio.volume = 0.03;
-	audio.play();
-};
+// 	audio.volume = 0.03;
+// 	audio.play();
+// };
 
 // rainbow grid coloring function
 const rainbowFadeOut = function (gridWidth) {
@@ -81,16 +145,16 @@ gridContainer.addEventListener('mousemove', (e) => {
 	previousCursorLocation.x = e.clientX;
 
 	if (leftOrRight === 'right')
-		gridContainer.style = 'cursor: url(/images/nyan-cat-right.cur), default';
+		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(/images/nyan-cat-right.cur), default`;
 	if (leftOrRight === 'left')
-		gridContainer.style = 'cursor: url(/images/nyan-cat-left.cur), default';
+		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(/images/nyan-cat-left.cur), default`;
 });
 
 // Calling rainbow grid
 rainbowFadeOut(4);
 
 // Function for user to input the drawing grid's width
-gridResolution.addEventListener('change', (e) => {
+gridResolution.addEventListener('input', (e) => {
 	const resolution = document.querySelector('.resolution');
 	const userResolution = +resolution.value;
 	console.log(resolution);
