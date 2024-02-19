@@ -9,6 +9,23 @@ const colorBtn = document.querySelector('.color-btn');
 const cleanBtn = document.querySelector('.clean-btn');
 let userColorChoice;
 
+// Function for Rainbow Mode
+const rainbowMode = function () {
+	const resolution = document.querySelector('.resolution');
+	const userResolution = +resolution.value;
+
+	// Custom grid
+	gridGenerator(userResolution);
+
+	// Create array of grid pixels from generated grid
+	gridPixel = Array.from(document.querySelectorAll('.grid-pixel'));
+
+	// Coloring grid pixels
+	rainbowFadeOut(userResolution);
+
+	console.log('rainbow box');
+};
+
 // Function to style Grid Container
 const gridContainerStyleSettings = function () {
 	return `text-align: center;
@@ -50,22 +67,6 @@ colorInput.addEventListener('input', (e) => {
 		0 0 82px ${userColorChoice}, 0 0 92px ${userColorChoice}, 0 0 102px ${userColorChoice}, 0 0 151px ${userColorChoice};`;
 
 	return userColorChoice;
-});
-
-rainbowBtn.addEventListener('click', (e) => {
-	e.preventDefault();
-	colorBtn.classList.remove('btn--active');
-	rainbowBtn.classList.add('btn--active');
-});
-
-colorBtn.addEventListener('click', (e) => {
-	e.preventDefault();
-	colorBtn.classList.add('btn--active');
-	rainbowBtn.classList.remove('btn--active');
-});
-
-cleanBtn.addEventListener('click', (e) => {
-	e.preventDefault();
 });
 
 // Callback function for Nyan Cat Song
@@ -153,7 +154,26 @@ gridContainer.addEventListener('mousemove', (e) => {
 // Calling rainbow grid
 rainbowFadeOut(4);
 
-// Function for user to input the drawing grid's width
+// Rainbow Mode
+rainbowBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+	colorBtn.classList.remove('btn--active');
+	rainbowBtn.classList.add('btn--active');
+});
+
+// Color Mode
+colorBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+	colorBtn.classList.add('btn--active');
+	rainbowBtn.classList.remove('btn--active');
+});
+
+// Clean Slate
+cleanBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+});
+
+// Eventlistener for user to input the drawing grid's width
 gridResolution.addEventListener('input', (e) => {
 	const resolution = document.querySelector('.resolution');
 	const userResolution = +resolution.value;
@@ -162,18 +182,19 @@ gridResolution.addEventListener('input', (e) => {
 		'.resolution-label'
 	).innerText = `Grid: ${userResolution} x ${userResolution}`;
 
-	resolution.blur();
 	e.preventDefault();
 
 	// Clear previous grid
 	gridContainer.innerHTML = '';
 
-	// Custom grid
-	gridGenerator(userResolution);
+	if (rainbowBtn.classList.contains('btn--active')) rainbowMode();
 
-	// Create array of grid pixels from generated grid
-	gridPixel = Array.from(document.querySelectorAll('.grid-pixel'));
-
-	// Coloring grid pixels
-	rainbowFadeOut(userResolution);
+	if (colorBtn.classList.contains('btn--active')) {
+		console.log('color mode');
+	}
 });
+
+// Eventlistener for Rainbow Mode Button
+rainbowBtn.addEventListener('click', () => rainbowMode());
+
+// Eventlistner for Color Mode Button
