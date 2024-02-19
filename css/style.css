@@ -94,6 +94,11 @@ h1 {
 	border-radius: 8px;
 	background: #fff;
 	box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff;
+	cursor: grab;
+}
+
+.resolution:hover {
+	cursor: col-resize;
 }
 
 .resolution::-webkit-slider-thumb {
@@ -118,8 +123,6 @@ h1 {
 	border: none;
 	background: none;
 	cursor: pointer;
-
-	background: rgb(137, 43, 226);
 }
 
 /* Button for Rainbow Mode */

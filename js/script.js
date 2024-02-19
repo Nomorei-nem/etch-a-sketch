@@ -9,10 +9,13 @@ const colorBtn = document.querySelector('.color-btn');
 const cleanBtn = document.querySelector('.clean-btn');
 let userColorChoice;
 
+let resolution = document.querySelector('.resolution');
+let userResolution = +resolution.value;
+
 // Function for Rainbow Mode
 const rainbowMode = function () {
-	const resolution = document.querySelector('.resolution');
-	const userResolution = +resolution.value;
+	// Clear previous grid
+	gridContainer.innerHTML = '';
 
 	// Custom grid
 	gridGenerator(userResolution);
@@ -24,6 +27,21 @@ const rainbowMode = function () {
 	rainbowFadeOut(userResolution);
 
 	console.log('rainbow box');
+};
+
+// Function for Color Mode
+const colorMode = function () {
+	// Clear previous grid
+	gridContainer.innerHTML = '';
+
+	// Custom grid
+	gridGenerator(userResolution);
+
+	// Create array of grid pixels from generated grid
+	gridPixel = Array.from(document.querySelectorAll('.grid-pixel'));
+
+	// Color mode gridPixels
+	normalColor(userResolution);
 };
 
 // Function to style Grid Container
@@ -42,21 +60,26 @@ margin: auto;
 cursor: url(/images/nyan-cat-right.cur), default;`;
 };
 
+// Bind 'this' keyword so colorInput eventlistener can use gridContainerStyleSettings() function
 const colorInputStyleSettings = gridContainerStyleSettings.bind(colorInput);
 
+// Event listener on color input
 colorInput.addEventListener('input', (e) => {
 	const h1 = document.querySelector('h1');
 	const colorBtn = document.querySelector('.color-btn');
 
 	userColorChoice = e.target.value;
 
+	// Changes color/shadow properties of color input
 	colorInput.style = `background-color: ${userColorChoice};
 		box-shadow: 0 0 30px ${userColorChoice};`;
 
 	colorBtn.style = `color: ${userColorChoice}`;
 
+	// Changes color/shadow properties of Grid container's border
 	gridContainer.style = colorInputStyleSettings();
 
+	// Changes color properties of h1 header
 	h1.style = `font-family: 'Big Shoulders Inline Display', sans-serif;
 	font-size: 100px;
 	text-transform: uppercase;
@@ -69,17 +92,7 @@ colorInput.addEventListener('input', (e) => {
 	return userColorChoice;
 });
 
-// Callback function for Nyan Cat Song
-// const nyanCatSong = function () {
-// 	const audio = new Audio(
-// 		'https://cf-media.sndcdn.com/jLbSNoCIpol4.128.mp3?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLW1lZGlhLnNuZGNkbi5jb20vakxiU05vQ0lwb2w0LjEyOC5tcDMqIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzA3OTk2NTIyfX19XX0_&Signature=TX9e2s7R-LpXW9ZJyqN7kuxE65uRY2SETNiRMU8h5Jy81mjVY5sIC~bnMCPsYClaA~bvousU3bwntFxc9i01HBUjwOGaf1vWUlRmZ~jKnl8I9QqNHbFIySzasKnMBo32oufXrgL1u7l-psLmFfDd4~12yEIPp9mTa-O00e9k26u-U-ZVG9rObQi6wzFbC9YxxnMD7pqqqbGiDkgoA1EpPvh15Ylr~8SHnFZTmMDtN4ZAitvGqs6IeIL~MQ~WDne4d39mqqQDqg1fgwrph-FsbBcc9Ghfx~CHCPVRMIy44H79-89dbTOF527xJK5OX03Osa1uRjDLr3dewwviDNd8jg__&Key-Pair-Id=APKAI6TU7MMXM5DG6EPQ'
-// 	);
-
-// 	audio.volume = 0.03;
-// 	audio.play();
-// };
-
-// rainbow grid coloring function
+// Rainbow Mode grid coloring function
 const rainbowFadeOut = function (gridWidth) {
 	const newPixelWidth = 100 / gridWidth;
 
@@ -104,9 +117,25 @@ const rainbowFadeOut = function (gridWidth) {
 
 					applyColorInGrid(one);
 					if (one <= 0) clearInterval(alphaCountdown);
-					// if (!alphaCheck === 1) applyColorInGrid(one);
 				}, 10);
 			}
+		});
+	}
+};
+
+// Color Mode grid coloring function
+const normalColor = function (gridWidth) {
+	const newPixelWidth = 100 / gridWidth;
+
+	for (let i = 0; i < gridPixel.length; i++) {
+		gridPixel[i].addEventListener('mouseover', (e) => {
+			const colorPick = colorInput.value;
+			const applyColorInGrid = function () {
+				e.target.style = `flex: 1 0 ${newPixelWidth}%; border-radius: 50%; background-color: ${colorPick}; box-shadow: 0 0 42px ${colorPick},
+				0 0 82px ${colorPick}, 0 0 92px ${colorPick}, 0 0 102px ${colorPick}, 0 0 151px ${colorPick};`;
+			};
+
+			applyColorInGrid();
 		});
 	}
 };
@@ -128,13 +157,6 @@ const randomColor = function () {
 
 // Creating 4x4 grid
 gridGenerator(4);
-
-// Song plays when you enter grid
-// gridContainer.addEventListener('mouseenter', () => nyanCatSong());
-// gridContainer.addEventListener('mouseleave', () => {
-// 	nyanCatSong().pause();
-// 	nyanCatSong().currentTime = 0;
-// });
 
 // Create array of grid pixels from generated grid
 let gridPixel = Array.from(document.querySelectorAll('.grid-pixel'));
@@ -175,26 +197,29 @@ cleanBtn.addEventListener('click', (e) => {
 
 // Eventlistener for user to input the drawing grid's width
 gridResolution.addEventListener('input', (e) => {
-	const resolution = document.querySelector('.resolution');
-	const userResolution = +resolution.value;
-	console.log(resolution);
+	resolution = document.querySelector('.resolution');
+	userResolution = +resolution.value;
+
 	document.querySelector(
 		'.resolution-label'
 	).innerText = `Grid: ${userResolution} x ${userResolution}`;
-
 	e.preventDefault();
 
-	// Clear previous grid
-	gridContainer.innerHTML = '';
-
+	// Rainbow mode if active
 	if (rainbowBtn.classList.contains('btn--active')) rainbowMode();
 
-	if (colorBtn.classList.contains('btn--active')) {
-		console.log('color mode');
-	}
+	// Color mode if active
+	if (colorBtn.classList.contains('btn--active')) colorMode();
 });
 
 // Eventlistener for Rainbow Mode Button
 rainbowBtn.addEventListener('click', () => rainbowMode());
 
 // Eventlistner for Color Mode Button
+colorBtn.addEventListener('click', () => colorMode());
+
+// Eventlistener for Clean Slate button
+cleanBtn.addEventListener('click', () => {
+	gridContainer.innerHTML = '';
+	colorMode();
+});
