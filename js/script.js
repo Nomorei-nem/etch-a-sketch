@@ -166,7 +166,6 @@ const darkenColor = function (gridWidth) {
 
 			const applyColorInGrid = function () {
 				e.target.style = `flex: 1 0 ${newPixelWidth}%; border-radius: 50%; background-color: ${colorPick}; box-shadow: 0 0 7px ${colorPick};opacity: ${pixelOpacity}`;
-				console.log(pixelOpacity);
 			};
 
 			applyColorInGrid();
@@ -202,9 +201,9 @@ gridContainer.addEventListener('mousemove', (e) => {
 	previousCursorLocation.x = e.clientX;
 
 	if (leftOrRight === 'right')
-		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(/images/nyan-cat-right.cur), default`;
+		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(../images/nyan-cat-right.cur), default`;
 	if (leftOrRight === 'left')
-		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(/images/nyan-cat-left.cur), default`;
+		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(../images/nyan-cat-left.cur), default`;
 });
 
 // Calling rainbow grid
