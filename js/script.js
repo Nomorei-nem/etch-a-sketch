@@ -7,6 +7,7 @@ const colorInput = document.querySelector('.color-picker');
 const rainbowBtn = document.querySelector('.rainbow-btn');
 const colorBtn = document.querySelector('.color-btn');
 const cleanBtn = document.querySelector('.clean-btn');
+const darkenBtn = document.querySelector('.darken-btn');
 let userColorChoice;
 
 let resolution = document.querySelector('.resolution');
@@ -25,8 +26,6 @@ const rainbowMode = function () {
 
 	// Coloring grid pixels
 	rainbowFadeOut(userResolution);
-
-	console.log('rainbow box');
 };
 
 // Function for Color Mode
@@ -42,6 +41,20 @@ const colorMode = function () {
 
 	// Color mode gridPixels
 	normalColor(userResolution);
+};
+
+// Function for Darken Mode
+const darkenMode = function () {
+	gridContainer.innerHTML = '';
+
+	// Custom grid
+	gridGenerator(userResolution);
+
+	// Create array of grid pixels from generated grid
+	gridPixel = Array.from(document.querySelectorAll('.grid-pixel'));
+
+	// Darken mode gridPixels
+	darkenColor(userResolution);
 };
 
 // Function to style Grid Container
@@ -140,6 +153,27 @@ const normalColor = function (gridWidth) {
 	}
 };
 
+// Darken Mode grid coloring function
+const darkenColor = function (gridWidth) {
+	const newPixelWidth = 100 / gridWidth;
+
+	for (let i = 0; i < gridPixel.length; i++) {
+		let pixelOpacity = 0;
+
+		gridPixel[i].addEventListener('mouseover', (e) => {
+			const colorPick = colorInput.value;
+			pixelOpacity += 0.1;
+
+			const applyColorInGrid = function () {
+				e.target.style = `flex: 1 0 ${newPixelWidth}%; border-radius: 50%; background-color: ${colorPick}; box-shadow: 0 0 7px ${colorPick};opacity: ${pixelOpacity}`;
+				console.log(pixelOpacity);
+			};
+
+			applyColorInGrid();
+		});
+	}
+};
+
 // Grid generator function
 const gridGenerator = function (gridWidth) {
 	const PixelWidth = 100 / gridWidth;
@@ -176,25 +210,6 @@ gridContainer.addEventListener('mousemove', (e) => {
 // Calling rainbow grid
 rainbowFadeOut(4);
 
-// Rainbow Mode
-rainbowBtn.addEventListener('click', (e) => {
-	e.preventDefault();
-	colorBtn.classList.remove('btn--active');
-	rainbowBtn.classList.add('btn--active');
-});
-
-// Color Mode
-colorBtn.addEventListener('click', (e) => {
-	e.preventDefault();
-	colorBtn.classList.add('btn--active');
-	rainbowBtn.classList.remove('btn--active');
-});
-
-// Clean Slate
-cleanBtn.addEventListener('click', (e) => {
-	e.preventDefault();
-});
-
 // Eventlistener for user to input the drawing grid's width
 gridResolution.addEventListener('input', (e) => {
 	resolution = document.querySelector('.resolution');
@@ -210,16 +225,55 @@ gridResolution.addEventListener('input', (e) => {
 
 	// Color mode if active
 	if (colorBtn.classList.contains('btn--active')) colorMode();
+
+	// Darken mode if active
+	if (darkenBtn.classList.contains('btn--active')) darkenMode();
 });
 
 // Eventlistener for Rainbow Mode Button
-rainbowBtn.addEventListener('click', () => rainbowMode());
+rainbowBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+
+	colorBtn.classList.remove('btn--active');
+	darkenBtn.classList.remove('btn--active');
+	rainbowBtn.classList.add('btn--active');
+
+	rainbowMode();
+});
 
 // Eventlistner for Color Mode Button
-colorBtn.addEventListener('click', () => colorMode());
+colorBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+
+	rainbowBtn.classList.remove('btn--active');
+	darkenBtn.classList.remove('btn--active');
+	colorBtn.classList.add('btn--active');
+
+	colorMode();
+});
+
+// Eventlistener for Darken Mode Button
+darkenBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+
+	colorBtn.classList.remove('btn--active');
+	rainbowBtn.classList.remove('btn--active');
+	darkenBtn.classList.add('btn--active');
+
+	darkenMode();
+});
 
 // Eventlistener for Clean Slate button
-cleanBtn.addEventListener('click', () => {
+cleanBtn.addEventListener('click', (e) => {
+	e.preventDefault();
 	gridContainer.innerHTML = '';
-	colorMode();
+
+	// Rainbow mode if active
+	if (rainbowBtn.classList.contains('btn--active')) rainbowMode();
+
+	// Color mode if active
+	if (colorBtn.classList.contains('btn--active')) colorMode();
+
+	// Darken mode if active
+	if (darkenBtn.classList.contains('btn--active')) darkenMode();
 });

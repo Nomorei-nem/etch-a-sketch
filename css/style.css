@@ -8,7 +8,6 @@
 		sans-serif;
 	font-size: 25px;
 	font-weight: 700;
-	/* border: 2px solid red; */
 }
 
 body {
@@ -219,12 +218,31 @@ h1 {
 		0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
 }
 
-.btn:hover {
+/* Darken Mode button */
+
+.darken-btn {
+	background: radial-gradient(black, grey);
+	color: white;
+	box-shadow: 0 0 7px grey;
+	transition: all 0.3s;
 }
 
-.btn.btn--active {
+.darken-btn:hover {
+	background: radial-gradient(gray, black);
+	color: black;
+	text-shadow: 0 0 7px rgb(255, 0, 0), 0 0 10px red, 0 0 21px red, 0 0 42px red,
+		0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
+	box-shadow: 0 0 7px rgb(255, 0, 0), 0 0 10px red, 0 0 21px red;
 }
 
-.color-me {
-	background-color: rgb(137, 43, 226);
+.darken-btn:active {
+	color: red;
+	text-shadow: 0 0 7px rgb(255, 0, 0), 0 0 10px red, 0 0 21px red, 0 0 42px red,
+		0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
+	box-shadow: 0 0 7px rgb(255, 0, 0), 0 0 10px red, 0 0 21px red, 0 0 42px red,
+		0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
+}
+
+.darken-btn.btn--active {
+	box-shadow: inset 0 0 0 3px #fff;
 }
