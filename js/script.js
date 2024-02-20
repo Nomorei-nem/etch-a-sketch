@@ -201,9 +201,9 @@ gridContainer.addEventListener('mousemove', (e) => {
 	previousCursorLocation.x = e.clientX;
 
 	if (leftOrRight === 'right')
-		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(../images/nyan-cat-right.cur), default`;
+		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(./images/nyan-cat-right.cur), default`;
 	if (leftOrRight === 'left')
-		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(../images/nyan-cat-left.cur), default`;
+		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(./images/nyan-cat-left.cur), default`;
 });
 
 // Calling rainbow grid
