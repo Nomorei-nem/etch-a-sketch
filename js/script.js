@@ -70,7 +70,7 @@ border-radius: 10px;
 border: 5px solid #ffffff;
 box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px ${userColorChoice};
 margin: auto;
-cursor: url(/images/nyan-cat-right.cur), default;`;
+cursor: url(/images/nyan-cat-right.png), default;`;
 };
 
 // Bind 'this' keyword so colorInput eventlistener can use gridContainerStyleSettings() function
@@ -201,9 +201,9 @@ gridContainer.addEventListener('mousemove', (e) => {
 	previousCursorLocation.x = e.clientX;
 
 	if (leftOrRight === 'right')
-		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(./images/nyan-cat-right.cur), default`;
+		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(./images/nyan-cat-right.png), default`;
 	if (leftOrRight === 'left')
-		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(./images/nyan-cat-left.cur), default`;
+		gridContainer.style = `${gridContainerStyleSettings()}cursor: url(./images/nyan-cat-left.png), default`;
 });
 
 // Calling rainbow grid
