@@ -241,7 +241,7 @@ rainbowBtn.addEventListener('click', (e) => {
 	rainbowMode();
 });
 
-// Eventlistner for Color Mode Button
+// Eventlistener for Color Mode Button
 colorBtn.addEventListener('click', (e) => {
 	e.preventDefault();
 
