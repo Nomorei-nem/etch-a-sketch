@@ -12,7 +12,7 @@
 
 body {
 	background: rgba(0, 0, 0, 0.92)
-		url(/images/nordwood-themes-9a58YsGiTPk-unsplash.jpg);
+		url(../images/nordwood-themes-9a58YsGiTPk-unsplash.jpg);
 	background-size: 30%;
 	background-blend-mode: darken;
 }
@@ -39,7 +39,7 @@ h1 {
 	border: 5px solid #ffffff;
 	box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px cyan;
 	margin: auto;
-	cursor: url(/images/nyan-cat-right.png), default;
+	cursor: url(../images/nyan-cat-right.png), default;
 }
 
 .container {
