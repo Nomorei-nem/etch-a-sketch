@@ -1,0 +1,254 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: #fff;
+	font-family: Comfortaa, system-ui, -apple-system, BlinkMacSystemFont,
+		'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+		sans-serif;
+	font-size: 25px;
+	font-weight: 700;
+}
+
+body {
+	background: rgba(0, 0, 0, 0.92)
+		url(/images/nordwood-themes-9a58YsGiTPk-unsplash.jpg);
+	background-size: 30%;
+	background-blend-mode: darken;
+}
+
+h1 {
+	font-family: 'Big Shoulders Inline Display', sans-serif;
+	font-size: 100px;
+	text-transform: uppercase;
+	margin-bottom: 50px;
+	text-align: center;
+	color: #fff;
+	text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px cyan,
+		0 0 82px cyan, 0 0 92px cyan, 0 0 102px cyan, 0 0 151px cyan;
+}
+
+/* All text */
+.text {
+	text-shadow: 0 0 7px #fff;
+}
+
+/* Container for everything */
+.container-border {
+	border-radius: 10px;
+	border: 5px solid #ffffff;
+	box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px cyan;
+	margin: auto;
+	cursor: url(/images/nyan-cat-right.png), default;
+}
+
+.container {
+	text-align: center;
+	display: grid;
+	align-items: center;
+	justify-content: space-between;
+	width: 700px;
+	aspect-ratio: 1 / 1;
+}
+
+.cell {
+	aspect-ratio: 1 / 1;
+}
+
+/* Container for just Grid Options and Grid */
+.game-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	position: relative;
+}
+
+/* Class for each Grid "Pixel" */
+.grid-pixel {
+	height: auto;
+}
+
+.grid-pixel:after {
+	content: '';
+	display: block;
+	padding-top: 100%;
+}
+
+/* Container for Grid Options */
+.grid-options {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	gap: 15px;
+	font-size: 12px;
+	font-weight: 900;
+	padding-left: 50px;
+}
+
+/* Range Input  */
+.resolution {
+	display: block;
+	align-self: center;
+	-webkit-appearance: none;
+	width: 210px;
+	height: 0.4em;
+	outline: none;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff;
+	cursor: grab;
+}
+
+.resolution:hover {
+	cursor: col-resize;
+}
+
+.resolution::-webkit-slider-thumb {
+	cursor: pointer;
+	position: relative;
+}
+
+.resolution {
+	box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff;
+}
+
+/* Color Input */
+.color-picker {
+	background-color: cyan;
+	box-shadow: 0 0 30px cyan;
+}
+
+/* All buttons */
+.btn {
+	padding: 10px;
+	border-radius: 8px;
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+/* Button for Rainbow Mode */
+.rainbow-btn {
+	background: linear-gradient(
+		to right,
+		red,
+		orange,
+		yellow,
+		green,
+		cyan,
+		blue,
+		purple
+	);
+	color: rgb(255, 255, 255);
+	font-weight: bold;
+	text-shadow: 0 0 7px yellowgreen, 0 0 10px yellowgreen, 0 0 21px yellowgreen,
+		0 0 42px yellowgreen, 0 0 82px yellowgreen, 0 0 92px yellowgreen,
+		0 0 102px yellowgreen, 0 0 151px yellowgreen;
+	box-shadow: 0 0 7px blueviolet;
+	transition: all 0.3s;
+}
+
+.rainbow-btn:hover {
+	text-shadow: 0 0 7px blueviolet, 0 0 10px blueviolet, 0 0 21px blueviolet,
+		0 0 42px blueviolet, 0 0 82px blueviolet, 0 0 92px blueviolet,
+		0 0 102px blueviolet, 0 0 151px blueviolet;
+	box-shadow: 0 0 7px blueviolet, 0 0 10px blueviolet, 0 0 21px blueviolet;
+}
+
+.rainbow-btn:active {
+	background: linear-gradient(to right, orange, yellow, green, cyan, blue);
+	text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #fff,
+		0 0 82px #fff, 0 0 92px #fff, 0 0 102px #fff, 0 0 151px #fff;
+	color: blueviolet;
+	box-shadow: 0 0 7px blueviolet, 0 0 10px blueviolet, 0 0 21px blueviolet,
+		0 0 42px blueviolet, 0 0 82px blueviolet, 0 0 92px blueviolet,
+		0 0 102px blueviolet, 0 0 151px blueviolet;
+}
+
+.rainbow-btn.btn--active {
+	box-shadow: inset 0 0 0 3px #fff;
+}
+
+/* Button for Color Mode */
+.color-btn {
+	color: cyan;
+	background: rgb(0, 143, 199);
+	box-shadow: 0 0 7px rgb(0, 143, 199);
+	transition: all 0.3s;
+}
+
+.color-btn:hover {
+	text-shadow: 0 0 7px blueviolet, 0 0 10px blueviolet, 0 0 21px blueviolet,
+		0 0 42px blueviolet, 0 0 82px blueviolet, 0 0 92px blueviolet,
+		0 0 102px blueviolet, 0 0 151px blueviolet;
+	box-shadow: 0 0 7px blueviolet, 0 0 10px blueviolet, 0 0 21px blueviolet;
+}
+
+.color-btn:active {
+	text-shadow: 0 0 7px blueviolet, 0 0 10px blueviolet, 0 0 21px blueviolet,
+		0 0 42px blueviolet, 0 0 82px blueviolet, 0 0 92px blueviolet,
+		0 0 102px blueviolet, 0 0 151px blueviolet;
+	color: blueviolet;
+	box-shadow: 0 0 7px blueviolet, 0 0 10px blueviolet, 0 0 21px blueviolet,
+		0 0 42px blueviolet, 0 0 82px blueviolet, 0 0 92px blueviolet,
+		0 0 102px blueviolet, 0 0 151px blueviolet;
+}
+
+.color-btn.btn--active {
+	box-shadow: inset 0 0 0 3px #fff;
+}
+
+/* Button for Cleaning Slate */
+.clean-btn {
+	background-color: #868e96;
+	transition: all 0.3s;
+}
+
+.clean-btn:hover {
+	background: radial-gradient(yellow, orangered);
+	color: yellow;
+	text-shadow: 0 0 7px rgb(255, 0, 0), 0 0 10px red, 0 0 21px red, 0 0 42px red,
+		0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
+	box-shadow: 0 0 7px rgb(255, 0, 0), 0 0 10px red, 0 0 21px red;
+}
+
+.clean-btn:active {
+	background: radial-gradient(yellow, orangered);
+	color: red;
+	text-shadow: 0 0 7px rgb(255, 0, 0), 0 0 10px red, 0 0 21px red, 0 0 42px red,
+		0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
+	box-shadow: 0 0 7px rgb(255, 0, 0), 0 0 10px red, 0 0 21px red, 0 0 42px red,
+		0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
+}
+
+/* Darken Mode button */
+
+.darken-btn {
+	background: radial-gradient(black, grey);
+	color: white;
+	box-shadow: 0 0 7px grey;
+	transition: all 0.3s;
+}
+
+.darken-btn:hover {
+	background: radial-gradient(gray, black);
+	color: black;
+	text-shadow: 0 0 7px rgb(255, 0, 0), 0 0 10px red, 0 0 21px red, 0 0 42px red,
+		0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
+	box-shadow: 0 0 7px rgb(255, 0, 0), 0 0 10px red, 0 0 21px red;
+}
+
+.darken-btn:active {
+	color: red;
+	text-shadow: 0 0 7px rgb(255, 0, 0), 0 0 10px red, 0 0 21px red, 0 0 42px red,
+		0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
+	box-shadow: 0 0 7px rgb(255, 0, 0), 0 0 10px red, 0 0 21px red, 0 0 42px red,
+		0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
+}
+
+.darken-btn.btn--active {
+	box-shadow: inset 0 0 0 3px #fff;
+}
