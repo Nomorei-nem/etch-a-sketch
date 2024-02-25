@@ -74,9 +74,9 @@ gridContainerBorder.addEventListener('mousemove', (e) => {
 	previousCursorLocation.x = e.clientX;
 
 	if (leftOrRight === 'right')
-		gridContainerBorder.style = `${gridContainerBorderSettings()}cursor: url(../images/nyan-cat-right.png), default`;
+		gridContainerBorder.style = `${gridContainerBorderSettings()}cursor: url(./images/nyan-cat-right.png), default`;
 	if (leftOrRight === 'left')
-		gridContainerBorder.style = `${gridContainerBorderSettings()}cursor: url(../images/nyan-cat-left.png), default`;
+		gridContainerBorder.style = `${gridContainerBorderSettings()}cursor: url(./images/nyan-cat-left.png), default`;
 });
 
 // Update UI grid dimensions label
